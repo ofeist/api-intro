@@ -1,5 +1,6 @@
 from openai import OpenAI
 client = OpenAI()
+openAiModel = "gpt-3.5-turbo"
 
 all_messages=[
         {"role": "system", "content": "You are a Chatbot naimed Claire."},
@@ -12,8 +13,9 @@ while True:
         all_messages.append( {"role": "user", "content": user_input} )
 
         completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages = all_messages
+            model= openAiModel,
+            messages = all_messages,
+            temperature=0,
         )
         all_messages.append( {"role": "assistant", "content": completion.choices[0].message.content} )
         # print("After:", all_messages)
